@@ -1,3 +1,5 @@
+***NOTE: This is a fork of [Vue Apollo V4 Composable](https://github.com/vuejs/vue-apollo/tree/v4/packages/vue-apollo-composable)***
+
 # useApollo
 useApollo is a "fork" of vue-apollo that removes support from Vue 2.x and adds support for Apollo 3.x and Vue 3.x 
 
