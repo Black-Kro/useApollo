@@ -67,6 +67,16 @@ createApp(App)
 </script>
 ```
 
+## Non-Standard API's
+
+- `useLazyQuery`
+    
+    This works the same as `useQuery` except it will not auto run. To run the query you must use the `start` function on the object.
+
+    ```ts
+    const { start, result, loading, error } = useLazyQuery(...);
+    ```
+
 ## Troubleshooting
 
 ### Vite
