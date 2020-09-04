@@ -1,6 +1,6 @@
 {
-  "name": "@black-kro/useApollo",
-  "version": "0.0.1",
+  "name": "@black-kro/use-apollo",
+  "version": "0.0.2",
   "private": false,
   "main": "./dist/index.common.js",
   "module": "./dist/index.esm.js",
@@ -24,12 +24,12 @@
   },
   "dependencies": {
     "@apollo/client": "^3.1.4",
-    "@rollup/plugin-commonjs": "^15.0.0",
     "graphql": "^15.3.0",
     "throttle-debounce": "^2.3.0",
     "vue": "3.0.0-rc.10"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-buble": "^0.21.3",
     "@vue/compiler-sfc": "3.0.0-rc.10",
     "rollup-plugin-clean": "^1.0.0",
