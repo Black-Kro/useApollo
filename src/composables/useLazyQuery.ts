@@ -47,6 +47,7 @@ interface UseQueryReturn<TResult, TVariables> {
     variables: Ref<TVariables>
     options: UseQueryOptions<TResult, TVariables> | Ref<UseQueryOptions<TResult, TVariables>>
     query: Ref<ObservableQuery<TResult, TVariables>>
+    fetch: (variables?: TVariables) => void
     refetch: (variables?: TVariables) => Promise<ApolloQueryResult<TResult>>
     fetchMore: <K extends keyof TVariables>(options: FetchMoreQueryOptions<TVariables, K> & FetchMoreOptions<TResult, TVariables>) => Promise<ApolloQueryResult<TResult>>
     subscribeToMore: <TSubscriptionVariables = OperationVariables, TSubscriptionData = TResult>(options: SubscribeToMoreOptions<TResult, TSubscriptionVariables, TSubscriptionData> | Ref<SubscribeToMoreOptions<TResult, TSubscriptionVariables, TSubscriptionData>> | ReactiveFunction<SubscribeToMoreOptions<TResult, TSubscriptionVariables, TSubscriptionData>>) => void
@@ -147,6 +148,17 @@ export function useLazyQuery<
     const query: Ref<ObservableQuery<TResult, TVariables>> = ref()
     let observer: ObservableSubscription
     let started = false
+
+    function fetch(variables) {
+        if (variables)
+            currentVariables = variables;
+
+        if (query.value) {
+            return query.value.refetch(variables);
+        } else {
+            return start();
+        }
+    }
 
     /**
      * Starts watching the query
@@ -434,15 +446,15 @@ export function useLazyQuery<
     // })
 
     // Auto start & stop
-    // watch(isEnabled, value => {
-    //     if (value) {
-    //         start()
-    //     } else {
-    //         stop()
-    //     }
-    // }, {
-    //     immediate: true
-    // })
+    watch(isEnabled, value => {
+        if (value) {
+            // start()
+        } else {
+            stop()
+        }
+    }, {
+        immediate: true
+    })
 
     // Teardown
     onBeforeUnmount(() => {
@@ -465,6 +477,7 @@ export function useLazyQuery<
         options: optionsRef,
         query,
         refetch,
+        fetch,
         fetchMore,
         subscribeToMore,
         onResult: resultEvent.on,
