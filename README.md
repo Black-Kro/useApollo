@@ -71,10 +71,12 @@ createApp(App)
 
 - `useLazyQuery`
     
-    This works the same as `useQuery` except it will not auto run. To run the query you must use the `start` function on the object.
+    This works the same as `useQuery` except it will not auto run. To run the query you must use the `fetch` function on the object.
 
     ```ts
-    const { start, result, loading, error } = useLazyQuery(...);
+    const { fetch, result, loading, error } = useLazyQuery(...);
+
+    fetch({ myVariables });
     ```
 
 ## Troubleshooting
